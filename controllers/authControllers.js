@@ -142,11 +142,62 @@ const logout_get= (req,res)=>{
     res.redirect('/')
 }
 
+const profile_get= (req,res)=>{
+    res.render('profile')
+}
+
+
+const profile_post = async (req, res) => {
+  const { username, fullName, phone, address } = req.body;
+
+  // Basic validation
+  if (!username && !fullName && !phone && !address) {
+    return res.status(400).json({ errors: { general: 'Please fill at least one field to update' } });
+  }
+
+  try {
+    // Get user ID from token (assuming middleware sets req.user or you decode jwt)
+    const userId = req.user?._id;
+    //const userId = res.locals.user?._id;
+
+    if (!userId) {
+      return res.status(401).json({ errors: { auth: 'Unauthorized' } });
+    }
+
+    // Update user fields (only the ones provided)
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        ...(username && { username }),
+        ...(fullName && { fullName }),
+        ...(phone && { phone }),
+        ...(address && { address }),
+      },
+      { new: true } // return updated user
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ errors: { user: 'User not found' } });
+    }
+
+    res.status(200).json({ user: updatedUser._id });
+
+  } catch (err) {
+    console.error(err);
+    const errors = handleErrors(err); // reuse existing error handler if any
+    res.status(400).json({ errors });
+  }
+
+  //res.redirect('/')
+}
+
 
 module.exports = {
     signup_get,
     signup_post,
     login_get,
     login_post,
-    logout_get
+    logout_get,
+    profile_get,
+    profile_post
 }

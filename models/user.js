@@ -31,11 +31,31 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: '' // optional field, can be empty string
   },
-
+  program: {
+    type: String,
+    default: '' // optional field, can be empty string
+  },
   year: {
     type: String,
     default: '' // optional field, e.g. "3rd"
-  }
+  },
+  number: {
+    type: String,
+    default: '' // optional field
+  },
+  address: {
+    type: String,
+    default: '' // optional field
+  },
+  fullname:{
+    type: String,
+    default: '' // optional field
+  },
+  username:{
+    type: String,
+    default: '' // optional field
+  },
+
 
 })
 
@@ -54,6 +74,8 @@ userSchema.pre('save', async function(next) {
   }
   next();
 });
+
+
 
 //static method to login
 

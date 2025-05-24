@@ -13,5 +13,10 @@ router.post('/login',authController.login_post)
 
 router.get('/logout',authController.logout_get)
 
+router.get('/profile',authController.profile_get)
+
+router.post('/profile',authController.profile_post)
+
+
 
 module.exports = router
