@@ -1,0 +1,183 @@
+.navbar {
+    background: linear-gradient(to right, #7b1fa2, #e91e63, #f44336);
+    color: white;
+    padding: 1rem 0;
+    position: sticky; /* Sticks navbar on scroll */
+    top: 0;
+    z-index: 10;
+    box-shadow:
+      0 4px 12px rgba(244, 67, 54, 0.35),
+      0 2px 8px rgba(0, 0, 0, 0.15); /* Softer but richer shadow */
+    backdrop-filter: saturate(180%) blur(8px); /* subtle blur */
+  }
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    position: relative; /* needed for any absolute children */
+  }
+  
+  .navbar h1 {
+    font-size: 1.9rem;
+    font-weight: 900;
+    font-family: "Poppins", sans-serif;
+    text-shadow:
+      0 0 5px rgba(255, 255, 255, 0.9),
+      0 0 10px rgba(255, 105, 180, 0.7);
+    user-select: none;
+    cursor: default;
+    letter-spacing: 1.5px;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar h1:hover {
+    color: #fff5f8;
+    text-shadow:
+      0 0 10px #fff,
+      0 0 20px #ff4081,
+      0 0 40px #f44336;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    font-family: "Poppins", sans-serif;
+    align-items: center;
+  }
+  
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.35s ease;
+    user-select: none;
+  }
+  
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    background: #ffc107;
+    border-radius: 4px;
+    transition: width 0.35s ease;
+    box-shadow: 0 0 10px #ffc107;
+  }
+  
+  .nav-links a:hover {
+    color: #ffc107;
+  }
+  
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+  
+  /* Cart Link Styling */
+  .cart-link {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.35s ease;
+    margin-right: 1.5rem; /* space from menu button */
+    user-select: none;
+  }
+  
+  .cart-link:hover {
+    color: #ffc107;
+  }
+  
+  .cart-link::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    background: #ffc107;
+    border-radius: 4px;
+    transition: width 0.35s ease;
+    box-shadow: 0 0 10px #ffc107;
+  }
+  
+  .cart-link:hover::after {
+    width: 100%;
+  }
+  
+  /* Right side wrapper for cart and mobile menu button */
+  .right-items {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* space between cart and button */
+  }
+  
+  /* Mobile Menu Button */
+  .mobile-menu-btn {
+    font-size: 1.7rem;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0.3rem 0.7rem;
+    border-radius: 8px;
+    box-shadow:
+      0 0 8px rgba(255, 193, 7, 0.6),
+      inset 0 0 5px rgba(255, 255, 255, 0.3);
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    user-select: none;
+    position: static; /* remove absolute */
+  }
+  
+  .mobile-menu-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow:
+      0 0 14px rgba(255, 193, 7, 1),
+      inset 0 0 7px rgba(255, 255, 255, 0.6);
+    transform: scale(1.1);
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none; /* hide by default on mobile */
+      flex-direction: column;
+      gap: 1.2rem;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: saturate(180%) blur(10px);
+      padding: 1rem 1.5rem;
+      position: absolute;
+      top: 4.5rem; /* just below navbar */
+      right: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(244, 67, 54, 0.6);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-10px);
+      z-index: 12;
+      min-width: 160px;
+    }
+  
+    .nav-links.active {
+      display: flex;
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+  }
+  
