@@ -1,26 +1,34 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
-import "./StudentSeller.css"; // Optional for styling
 
-const StudentSeller = () => {
-  const { state } = useLocation(); // 👈 get passed data
-
-  if (!state) {
-    return <p>No product data available.</p>;
-  }
-
-  const { name, description, price, image } = state;
-
+const StudentSeller = ({ products }) => {
   return (
-    <div className="blog-post" style={{ maxWidth: "600px", margin: "auto", padding: "20px", border: "1px solid #ccc", borderRadius: "10px" }}>
-      <h2>{name}</h2>
-      <img
-        src={image}
-        alt={name}
-        style={{ width: "100%", borderRadius: "8px", marginBottom: "15px" }}
-      />
-      <p><strong>Description:</strong> {description}</p>
-      <p><strong>Price:</strong> ${price.toFixed(2)}</p>
+    <div style={{ padding: "2rem" }}>
+      <h2>My Uploaded Products</h2>
+      {products.length === 0 ? (
+        <p>No products uploaded yet.</p>
+      ) : (
+        <div style={{ display: "grid", gap: "1rem" }}>
+          {products.map((product) => (
+            <div
+              key={product.id}
+              style={{
+                border: "1px solid #ccc",
+                padding: "1rem",
+                borderRadius: "8px",
+              }}
+            >
+              <img
+                src={product.image}
+                alt={product.name}
+                style={{ width: "100%", maxWidth: "300px", borderRadius: "8px" }}
+              />
+              <h3>{product.name}</h3>
+              <p>{product.description}</p>
+              <p><strong>${product.price.toFixed(2)}</strong></p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

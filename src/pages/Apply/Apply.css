@@ -1,0 +1,115 @@
+/* Container */
+.max-w-2xl {
+    margin-bottom: 50px;
+    max-width: 640px;
+  }
+  
+  .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .mt-8 {
+    margin-top: 2rem; /* 32px */
+  }
+  
+  .p-6 {
+    padding: 1.5rem; /* 24px */
+  }
+  
+  .border {
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  .rounded {
+    border-radius: 0.375rem; /* 6px */
+  }
+  
+  .shadow {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Heading */
+  .text-2xl {
+    font-size: 1.5rem; /* 24px */
+    line-height: 2rem;
+  }
+  
+  .font-bold {
+    font-weight: 700;
+  }
+  
+  .mb-6 {
+    margin-bottom: 1.5rem;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  /* Form spacing */
+  .space-y-4 > * + * {
+    margin-top: 1rem;
+  }
+  
+  /* Label */
+  label.block {
+    display: block;
+  }
+  
+  .font-semibold {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Input and textarea */
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: #3b82f6; /* blue-600 */
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+  }
+  
+  /* Textarea specific height */
+  textarea.h-24 {
+    height: 6rem; /* 96px */
+    resize: vertical;
+  }
+  
+  /* Button */
+  button[type="submit"] {
+    background-color: #2563eb; /* blue-600 */
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #1e40af; /* blue-700 */
+  }
+  

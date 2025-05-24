@@ -16,7 +16,7 @@ import ChatBot from "./pages/ChatBot/Chatbot";
 import MapView from "./pages/MapView/MapView"
 import Seller from "./pages/Seller/Seller";
 import StuedntSeller from "./pages/StudentSeller/StudentSeller";
-
+import Apply from "./pages/Apply/Apply";
 // Cart Context
 import { CartProvider } from "./pages/CartContext/CartContext";
 // import Profile from "./pages/Profile";
@@ -48,6 +48,7 @@ function AppContent() {
         <Route path="/mapviwe" element={<MapView />} />
         <Route path="/seller" element={<Seller />} />
         <Route path="/studentseller" element={<StuedntSeller />} />
+        <Route path="/apply" element={<Apply />} />
         {/* <Route path="/profile" element={<Profile />} /> */}
         {/* <Route path="/create-listing" element={<CreateListing />} /> */}
         {/* <Route path="/listing/:id" element={<ListingDetails />} /> */}

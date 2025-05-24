@@ -5,7 +5,7 @@ import { FaInstagram, FaPinterestP, FaWhatsapp } from 'react-icons/fa';
 const footerLinks = [
   // { label: '', href: '#company' },
   { label: 'Products', href: '#product' },
-  { label: 'Apply ', href: '#apply' },
+  { label: 'Apply ', href: '/apply' },
   { label: 'About Us', href: '#about-us' },
   { label: 'Contact Us', href: '#contact-us' },
 ];

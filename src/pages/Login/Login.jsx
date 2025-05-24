@@ -34,7 +34,7 @@ const Login = () => {
     // 👉 SIMULATED LOGIN
     if (formData.email === "student@university.edu" && formData.password === "password123") {
       setSuccess("Login simulated. Redirecting...");
-      setTimeout(() => navigate("/dashboard"), 1500);
+      setTimeout(() => navigate("/"), 1500);
     } else {
       setError("Invalid email or password.");
     }

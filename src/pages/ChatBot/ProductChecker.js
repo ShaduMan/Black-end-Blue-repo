@@ -1,8 +1,9 @@
+// ProductChecker.js
 import all_product from "../Assets/all_product";
 
 export function checkProductAvailability(userMessage) {
   const lowerMsg = userMessage.toLowerCase();
-  
+
   for (let product of all_product) {
     const productName = product.name.toLowerCase();
     if (lowerMsg.includes(productName)) {

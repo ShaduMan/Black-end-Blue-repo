@@ -51,13 +51,14 @@
     background-color: rgba(255 255 255 / 0.15); /* subtle highlight */
   }
   
-  /* Right side: Cart + Toggle Button */
+  /* Right side: Cart + Toggle Button + Dashboard */
   .right-items {
     display: flex;
     align-items: center;
     gap: 1rem;
   }
   
+  /* Cart link */
   .cart-link {
     color: #edf2f4;
     text-decoration: none;
@@ -83,6 +84,67 @@
     padding: 0.5rem;
   }
   
+  /* Dashboard menu container */
+  .dashboard-menu {
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    color: #edf2f4;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  
+  /* Dashboard hover background */
+  .dashboard-menu:hover {
+    background-color: rgba(255 255 255 / 0.15);
+  }
+  
+  /* Dropdown content */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%; /* right below the dashboard label */
+    left: 0;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(37, 117, 252, 0.4);
+    min-width: 180px;
+    z-index: 1100;
+    flex-direction: column;
+  }
+  
+  /* Show dropdown on hover */
+  .dashboard-menu:hover .dropdown-content {
+    display: flex;
+  }
+  
+  /* Show dropdown when active (for click toggle) */
+  .dropdown-content.active {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Dropdown links */
+  .dropdown-content a {
+    color: #edf2f4;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    border-radius: 6px;
+  }
+  
+  /* Dropdown link hover effect */
+  .dropdown-content a:hover {
+    background-color: rgba(255 255 255 / 0.25);
+    color: #ffffff;
+  }
+  
   /* Mobile Styles */
   @media (max-width: 768px) {
     .nav-links {
@@ -103,6 +165,19 @@
   
     .mobile-menu-btn {
       display: block;
+    }
+  
+    /* Dropdown content in mobile nav */
+    .dropdown-content {
+      position: static;
+      box-shadow: none;
+      background: transparent;
+      min-width: auto;
+    }
+  
+    /* Disable hover dropdown on mobile */
+    .dashboard-menu:hover .dropdown-content {
+      display: none;
     }
   }
   

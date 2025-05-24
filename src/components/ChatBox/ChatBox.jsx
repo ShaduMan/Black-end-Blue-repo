@@ -1,54 +1,50 @@
-import React, { useState } from "react";
-import axios from "axios";
-import "./ChatBox.css"; // Make sure this CSS file exists
+import React, { useState, useEffect } from "react";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import "./ChatBox.css";
+
+// Initialize Gemini
+const genAI = new GoogleGenerativeAI("AIzaSyAmxiUIC0pzhqxmW8Y_f9LbB-NEBzqcftg");
 
 const ChatBox = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([
-    { from: "bot", text: "Hello! Ask me anything." }
+    { from: "bot", text: "Hi! I'm your student marketplace assistant." }
   ]);
   const [loading, setLoading] = useState(false);
+  const [chat, setChat] = useState(null);
 
-  const toggleChat = () => setIsOpen(!isOpen);
+  useEffect(() => {
+    const initChat = async () => {
+      try {
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" }); // ✅ Correct model
+        const chatSession = await model.startChat(); // ✅ Correct method
+        setChat(chatSession);
+      } catch (error) {
+        console.error("Failed to start chat:", error);
+      }
+    };
+    initChat();
+  }, []);
+
+  const toggleChat = () => setIsOpen(prev => !prev);
 
   const sendMessage = async () => {
-    if (!input.trim()) return;
+    if (!input.trim() || !chat) return;
 
-    const userMessage = { from: "user", text: input };
-    const updatedMessages = [...messages, userMessage];
-    setMessages(updatedMessages);
+    const userMsg = { from: "user", text: input };
+    setMessages(prev => [...prev, userMsg]);
     setInput("");
     setLoading(true);
 
     try {
-      const response = await axios.post(
-        "https://openrouter.ai/api/v1/chat/completions",
-        {
-          model: "google/gemini-2.5-flash-preview",
-          messages: [
-            { role: "system", content: "You are a helpful assistant for a student marketplace website." },
-            ...updatedMessages.map((msg) => ({
-              role: msg.from === "user" ? "user" : "assistant",
-              content: msg.text
-            }))
-          ]
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `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`,
-            "HTTP-Referer": "http://localhost:3000",
-            "X-Title": "StudentMarketplace"
-          }
-        }
-      );
-
-      const botReply = response.data.choices?.[0]?.message?.content || "No response from AI.";
-      setMessages((prev) => [...prev, { from: "bot", text: botReply }]);
+      const result = await chat.sendMessage(input);
+      const response = await result.response;
+      const botReply = response.text();
+      setMessages(prev => [...prev, { from: "bot", text: botReply }]);
     } catch (error) {
-      console.error("API error:", error);
-      setMessages((prev) => [...prev, { from: "bot", text: "Something went wrong." }]);
+      console.error("Send message error:", error);
+      setMessages(prev => [...prev, { from: "bot", text: "Error from AI response." }]);
     } finally {
       setLoading(false);
     }
@@ -68,28 +64,22 @@ const ChatBox = () => {
         <div className="chatbox">
           <div className="chatbox-messages">
             {messages.map((msg, idx) => (
-              <div
-                key={idx}
-                className={`chatbox-message ${msg.from === "user" ? "user" : "bot"}`}
-              >
+              <div key={idx} className={`message ${msg.from}`}>
                 {msg.text}
               </div>
             ))}
-            {loading && <div className="chatbox-message bot">Typing...</div>}
+            {loading && <div className="message bot">Typing...</div>}
           </div>
-
-          <div className="chatbox-input-container">
+          <div className="chatbox-input">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Type your message..."
+              placeholder="Type a message..."
               disabled={loading}
             />
-            <button onClick={sendMessage} disabled={loading}>
-              Send
-            </button>
+            <button onClick={sendMessage} disabled={loading}>Send</button>
           </div>
         </div>
       )}
