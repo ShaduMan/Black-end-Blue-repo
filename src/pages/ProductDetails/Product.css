@@ -1,0 +1,118 @@
+.product-details-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 0 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .back-button {
+    background: none;
+    border: none;
+    color: #264653;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  
+  .back-button:hover {
+    text-decoration: underline;
+  }
+  
+  .product-details-card {
+    display: flex;
+    gap: 40px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  
+  .product-details-image {
+    max-width: 380px;
+    width: 100%;
+    height: auto;
+    max-height: 450px;
+    object-fit: contain;
+    display: block;
+    background-color: #f7f7f7;
+    padding: 10px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  
+  .product-details-info {
+    flex: 1;
+    min-width: 280px;
+  }
+  
+  .product-details-info h1 {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    color: #222;
+  }
+  
+  .category {
+    font-size: 1rem;
+    color: #888;
+    margin-bottom: 15px;
+  }
+  
+  .price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2a9d8f;
+  }
+  
+  .old-price {
+    font-size: 1rem;
+    color: #bbb;
+    text-decoration: line-through;
+    margin-left: 12px;
+    font-weight: 400;
+  }
+  
+  .description {
+    font-size: 1rem;
+    color: #444;
+    margin: 20px 0;
+    line-height: 1.6;
+  }
+  
+  .buy-button {
+    background-color: #264653;
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  
+  .buy-button:hover {
+    background-color: #1b353d;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .product-details-card {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .product-details-image {
+      max-width: 100%;
+      max-height: 300px;
+    }
+  
+    .product-details-info {
+      width: 100%;
+    }
+  }
+  

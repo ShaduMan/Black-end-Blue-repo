@@ -1,0 +1,157 @@
+/* Import Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Full-screen gradient with blurred image */
+.min-h-screen {
+  min-height: 100vh;
+  background: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1600&q=80')
+    no-repeat center center/cover;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Backdrop blur layer */
+.min-h-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(240, 248, 255, 0.4);
+  backdrop-filter: blur(8px);
+  z-index: 0;
+}
+
+/* Form container with glass effect */
+.bg-white {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1.5rem;
+  animation: fadeInUp 0.7s ease forwards;
+}
+
+/* Additional spacing and max width */
+.p-8 {
+  padding: 2.5rem;
+}
+.max-w-md {
+  max-width: 420px;
+}
+
+/* Fade in from below */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Heading */
+.text-2xl {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1e3a8a;
+  text-align: center;
+}
+
+/* Inputs */
+input {
+  width: 100%;
+  padding: 0.75rem 1.1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  background-color: #f9fafb;
+  transition: 0.3s ease-in-out;
+}
+
+input:focus {
+  outline: none;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.3);
+  background-color: #ffffff;
+}
+
+/* Submit button */
+button {
+  background: linear-gradient(to right, #3b82f6, #6366f1);
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
+}
+
+button:hover {
+  background: linear-gradient(to right, #2563eb, #4f46e5);
+  transform: scale(1.02);
+  box-shadow: 0 6px 18px rgba(59, 130, 246, 0.4);
+}
+
+/* Links */
+a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #1e40af;
+}
+
+/* Message boxes */
+.text-red-500 {
+  color: #dc2626;
+  background: #ffe4e6;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.text-green-600 {
+  color: #15803d;
+  background: #d1fae5;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.space-y-4 > * + * {
+  margin-top: 1rem;
+}
+
+.w-full {
+  width: 100%;
+}

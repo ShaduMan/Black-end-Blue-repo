@@ -1,0 +1,108 @@
+/* Container for the whole navbar */
+.navbar {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(37, 117, 252, 0.25);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Inner container for content alignment */
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  /* Logo */
+  .navbar h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #edf2f4; /* light color for contrast */
+  }
+  
+  /* Navigation Links */
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  
+  .nav-links a,
+  .nav-links .link {
+    color: #edf2f4;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s, background-color 0.3s;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+  }
+  
+  .nav-links a:hover {
+    color: #ffffff;
+    background-color: rgba(255 255 255 / 0.15); /* subtle highlight */
+  }
+  
+  /* Right side: Cart + Toggle Button */
+  .right-items {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .cart-link {
+    color: #edf2f4;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .cart-link:hover {
+    background-color: rgba(255 255 255 / 0.15);
+    color: #ffffff;
+  }
+  
+  /* Mobile Menu Button */
+  .mobile-menu-btn {
+    font-size: 1.6rem;
+    background: none;
+    color: #edf2f4;
+    border: none;
+    cursor: pointer;
+    display: none;
+    padding: 0.5rem;
+  }
+  
+  /* Mobile Styles */
+  @media (max-width: 768px) {
+    .nav-links {
+      flex-direction: column;
+      align-items: flex-start;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      width: 100%;
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      box-shadow: 0 4px 6px rgba(37, 117, 252, 0.25);
+      border-radius: 0 0 12px 12px;
+    }
+  
+    .nav-links.active {
+      display: flex;
+    }
+  
+    .mobile-menu-btn {
+      display: block;
+    }
+  }
+  

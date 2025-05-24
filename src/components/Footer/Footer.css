@@ -1,0 +1,129 @@
+/* Footer Container */
+.footer {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    padding: 2.5rem 1rem 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+    box-shadow: 0 -4px 15px rgba(37, 117, 252, 0.4);
+  }
+  
+  /* Inner container to align content */
+  .footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  /* Brand Name */
+  .footer-logo-section {
+    flex: 1 1 200px;
+  }
+  
+  .footer-brand-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    margin: 0;
+    user-select: text;
+  }
+  
+  /* Navigation */
+  .footer-nav {
+    flex: 2 1 400px;
+  }
+  
+  .footer-links {
+    list-style: none;
+    display: flex;
+    gap: 1.8rem;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .footer-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.3rem 0.5rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .footer-link:hover,
+  .footer-link:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    outline: none;
+    color: #d6d6d6;
+  }
+  
+  /* Social Icons */
+  .footer-social-icons {
+    flex: 1 1 150px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.5rem;
+  }
+  
+  .footer-icon-link {
+    color: white;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .footer-icon-link:hover,
+  .footer-icon-link:focus {
+    color: #e0e0ff;
+    transform: scale(1.1);
+    outline: none;
+  }
+  
+  /* Copy Right Section */
+  .footer-copy-right {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    opacity: 0.85;
+    user-select: text;
+  }
+  
+  .footer-copy-right hr {
+    border: none;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.15);
+    margin-bottom: 0.8rem;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .footer-container {
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+  
+    .footer-logo-section,
+    .footer-nav,
+    .footer-social-icons {
+      flex: none;
+      width: 100%;
+      text-align: center;
+    }
+  
+    .footer-links {
+      justify-content: center;
+    }
+  
+    .footer-social-icons {
+      justify-content: center;
+    }
+  }
+  
