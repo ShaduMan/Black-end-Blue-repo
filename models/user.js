@@ -3,12 +3,23 @@ const {isEmail} = require('validator')
 const bcrypt = require('bcrypt')
 
 const userSchema = new mongoose.Schema({
+    name: {
+    type: String,
+    required: [true, 'Please enter your full name']
+    },
     email : {
         type : String,
         required : [true, 'Please enter an email'],
         unique : true,
         lowercase : true,
-        validate :[isEmail, "Please enter a valid email"]
+        validate: {
+    validator: function(email) {
+      // Check if it's a valid email AND ends with @iut-dhaka.edu
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email) && email.endsWith('@iut-dhaka.edu');
+    },
+    message: 'Email must be a valid @iut-dhaka.edu address'
+  }
     },
 
     password : {
@@ -16,6 +27,15 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Please enter an password'],
         minlength : [6, 'Minimum length is 6']
     },
+    department: {
+    type: String,
+    default: '' // optional field, can be empty string
+  },
+
+  year: {
+    type: String,
+    default: '' // optional field, e.g. "3rd"
+  }
 
 })
 
@@ -27,12 +47,13 @@ userSchema.post('save',function(doc,next){
 })
 
 //fire a function before doc saved to db
-userSchema.pre('save', async function(next){
-    //console.log('user about to be created', this)
-    const salt = await bcrypt.genSalt()
-    this.password = await bcrypt.hash(this.password,salt)
-    next()
-})
+userSchema.pre('save', async function(next) {
+  if (this.isModified('password')) {  // Only hash if password is new/modified
+    const salt = await bcrypt.genSalt();
+    this.password = await bcrypt.hash(this.password, salt);
+  }
+  next();
+});
 
 //static method to login
 

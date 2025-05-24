@@ -1,54 +1,160 @@
 <%- include('partials/header'); -%>
 
-<form action="/signup">
-  <h2>Sign up</h2>
-  <label for="email">Email</label>
-  <input type="text" name="email" required />
-  <div class="email error"></div>
-  <label for="password">Password</label>
-  <input type="password" name="password" required />
-  <div class="password error"></div>
-  <button>Sign up</button>
-</form>
+<div class="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+  <div class="bg-white shadow-md rounded-xl p-8 w-full max-w-md">
+    <h2 class="text-2xl font-semibold mb-6 text-center">Student Sign Up</h2>
+
+    <!-- General form error -->
+    <div class="general error text-red-500 mb-4 text-sm text-center"></div>
+
+    <form id="signupForm" class="space-y-4" novalidate>
+      <div>
+        <input
+          name="name"
+          type="text"
+          placeholder="Full Name"
+          class="w-full px-4 py-2 border rounded-lg"
+          required
+        />
+        <div class="name error text-red-500 text-sm mt-1"></div>
+      </div>
+
+      <div>
+        <input
+          name="email"
+          type="email"
+          placeholder="University Email"
+          class="w-full px-4 py-2 border rounded-lg"
+          required
+        />
+        <div class="email error text-red-500 text-sm mt-1"></div>
+      </div>
+
+      <div>
+        <input
+          name="password"
+          type="password"
+          placeholder="Password"
+          class="w-full px-4 py-2 border rounded-lg"
+          required
+        />
+        <div class="password error text-red-500 text-sm mt-1"></div>
+      </div>
+
+      <div>
+        <input
+          name="confirmPassword"
+          type="password"
+          placeholder="Confirm Password"
+          class="w-full px-4 py-2 border rounded-lg"
+          required
+        />
+        <div class="confirmPassword error text-red-500 text-sm mt-1"></div>
+      </div>
+
+      <div>
+        <input
+          name="department"
+          type="text"
+          placeholder="Department (optional)"
+          class="w-full px-4 py-2 border rounded-lg"
+        />
+        <div class="department error text-red-500 text-sm mt-1"></div>
+      </div>
+
+      <div>
+        <input
+          name="year"
+          type="text"
+          placeholder="Year of Study (e.g., 3rd)"
+          class="w-full px-4 py-2 border rounded-lg"
+        />
+        <div class="year error text-red-500 text-sm mt-1"></div>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg"
+      >
+        Sign Up
+      </button>
+    </form>
+
+    <p class="mt-4 text-sm text-center">
+      Already have an account?
+      <a href="/login" class="text-blue-600 hover:underline">Login here</a>
+    </p>
+  </div>
+</div>
 
 <%- include('partials/footer'); -%>
 
 <script>
-  const form = document.querySelector('form');
-  const emailError = document.querySelector('.email.error')
-  const passwordError = document.querySelector('.password.error')
+  const form = document.getElementById('signupForm');
 
-  form.addEventListener('submit', async(e) => {
+  // Error divs for each field
+  const errors = {
+    general: document.querySelector('.general.error'),
+    name: document.querySelector('.name.error'),
+    email: document.querySelector('.email.error'),
+    password: document.querySelector('.password.error'),
+    confirmPassword: document.querySelector('.confirmPassword.error'),
+    department: document.querySelector('.department.error'),
+    year: document.querySelector('.year.error'),
+  };
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    //reset errors
-    emailError.textContent = ''
-    passwordError.textContent = ''
+    // Clear previous errors
+    Object.values(errors).forEach(el => el.textContent = '');
 
-    // get values
-    const email = form.email.value;
-    const password = form.password.value;
+    const formData = {
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      password: form.password.value,
+      confirmPassword: form.confirmPassword.value,
+      department: form.department.value.trim(),
+      year: form.year.value.trim(),
+    };
 
-    //console.log(email, password);
-
-    try{
-      const res = await fetch('/signup', {
-        method: 'POST',
-        body: JSON.stringify({email, password}),
-        headers: {'Content-Type': 'application/json'}
-      })
-      const data = await res.json()
-      console.log(data)
-      if(data.errors){
-        emailError.textContent = data.errors.email
-        passwordError.textContent = data.errors.password
-      }
-      if(data.user){
-        location.assign('/')
-      }
-    }catch(err){
-      console.log(err)
+    // Frontend validation for email domain
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@iut-dhaka\.edu$/;
+    if (!emailRegex.test(formData.email)) {
+      errors.email.textContent = 'Only @iut-dhaka.edu email addresses are allowed.';
+      return;
     }
 
+    // Password confirmation check
+    if (formData.password !== formData.confirmPassword) {
+      errors.confirmPassword.textContent = 'Passwords do not match.';
+      return;
+    }
+
+    try {
+      const res = await fetch('/signup', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      const data = await res.json();
+
+      if (data.errors) {
+        // Show errors for each field if available
+        for (const key in errors) {
+          if (data.errors[key]) {
+            errors[key].textContent = data.errors[key];
+          }
+        }
+      }
+
+      if (data.user) {
+        location.assign('/');
+      }
+    } catch (err) {
+      console.error(err);
+      errors.general.textContent = 'Something went wrong. Please try again later.';
+    }
   });
 </script>
